@@ -9,6 +9,14 @@ scope CoreMain initializer OnInit
     private function Update takes nothing returns nothing
         set GameTime = GameTime + DeltaTime
 
+        if GameSeeker == GAME_SEEKER_INITIALIZE then
+            
+        elseif GameSeeker == GAME_SEEKER_PLAYING then
+
+        elseif GameSeeker == GAME_SEEKER_PAUSE then
+
+        endif
+
         call DisplayTextToPlayer(Player(0), 0.00, 0.00, R2S(GameTime))
 
     endfunction

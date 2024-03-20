@@ -1,0 +1,12 @@
+{
+    "folders": [
+        {
+            "name": "W3Core",
+            "path": ".",
+        },
+    ],
+    "settings": {
+        "typescript.tsc.autoDetect": "off",
+        "npm.autoDetect": "off",
+    },
+}
