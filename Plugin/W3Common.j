@@ -3,7 +3,8 @@ library W3Common
         globals
             private integer array powShift
             private player localPlayer
-            private constant real DISPLAY_LOG_DURATION - 30.
+            private constant real DISPLAY_LOG_DURATION = 30.
+            private string array stringCache
         endglobals
 
         private struct Executor extends array
@@ -14,9 +15,9 @@ library W3Common
                     set powShift[bit] = R2I(Pow(2, bit))
                     set bit = bit + 1
                 endloop
-            endmethod
 
-            set localPlayer = GetLocalPlayer()
+                set localPlayer = GetLocalPlayer()
+            endmethod
         endstruct
     else
         //! JN Bit
@@ -25,8 +26,8 @@ library W3Common
         native BitXor takes integer x, integer y returns integer
         native BitShiftL takes integer x, integer y returns integer
         native BitShiftR takes integer x, integer y returns integer
-        native I2R takes integer i returns real
-        native R2I takes real r returns integer
+        native JNI2R takes integer i returns real
+        native JNR2I takes real r returns integer
         
         //! JN Memory plugin (reforged not supported)
         // globals
@@ -38,63 +39,63 @@ library W3Common
         //     constant integer JNProc__fastcall = 3
         //     constant integer JNProc__thiscall = 4
         // endglobals
-        // native GetModuleHandle takes string moduleName returns integer
-        // native FindModuleHandle takes integer offset, integer signature returns integer
-        // native MemoryGetByte takes integer offset returns integer
-        // native MemorySetByte takes integer offset, integer value returns nothing
-        // native MemoryGetInteger takes integer offset returns integer
-        // native MemorySetInteger takes integer offset, integer value returns nothing
-        // native MemoryGetReal takes integer offset returns real
-        // native MemorySetReal takes integer offset, real value returns nothing
-        // native MemoryGetString takes integer offset, integer size returns string
-        // native MemorySetString takes integer offset, string value, integer size returns nothing
-        // native ProcCall takes integer callConv, integer address, hashtable ht returns boolean
+        // native JNGetModuleHandle takes string moduleName returns integer
+        // native JNFindModuleHandle takes integer offset, integer signature returns integer
+        // native JNMemoryGetByte takes integer offset returns integer
+        // native JNMemorySetByte takes integer offset, integer value returns nothing
+        // native JNMemoryGetInteger takes integer offset returns integer
+        // native JNMemorySetInteger takes integer offset, integer value returns nothing
+        // native JNMemoryGetReal takes integer offset returns real
+        // native JNMemorySetReal takes integer offset, real value returns nothing
+        // native JNMemoryGetString takes integer offset, integer size returns string
+        // native JNMemorySetString takes integer offset, string value, integer size returns nothing
+        // native JNProcCall takes integer callConv, integer address, hashtable ht returns boolean
 
         //! JN Miscellaneous
-        native WriteLog takes string str returns nothing
-        // [reforged not supported] native WriteLogReal takes real r returns nothing
-        // [reforged not supported] native GetLocalDateTime takes nothing returns string
-        // [reforged not supported] native GetLocalUnixTime takes nothing returns integer
-        // [reforged not supported] native GetMaxAttackSpeed takes nothing returns real
-        // [reforged not supported] native SetMaxAttackSpeed takes real speed returns nothing
-        // [reforged not supported] native IsReplayMode takes nothing returns boolean
-        // [reforged not supported] native IsHostPlayer takes nothing returns boolean
-        // [reforged not supported] native GetSyncDelay takes nothing returns integer
-        // [reforged not supported] native SetSyncDelay takes integer delay returns nothing
-        // [reforged not supported] native GetConnectionState takes nothing returns integer
-        // [reforged not supported] native ProcessStart takes string fileName, string arguments returns boolean
+        native JNWriteLog takes string str returns nothing
+        // [reforged not supported] native JNWriteLogReal takes real r returns nothing
+        // [reforged not supported] native JNGetLocalDateTime takes nothing returns string
+        // [reforged not supported] native JNGetLocalUnixTime takes nothing returns integer
+        // [reforged not supported] native JNGetMaxAttackSpeed takes nothing returns real
+        // [reforged not supported] native JNSetMaxAttackSpeed takes real speed returns nothing
+        // [reforged not supported] native JNIsReplayMode takes nothing returns boolean
+        // [reforged not supported] native JNIsHostPlayer takes nothing returns boolean
+        // [reforged not supported] native JNGetSyncDelay takes nothing returns integer
+        // [reforged not supported] native JNSetSyncDelay takes integer delay returns nothing
+        // [reforged not supported] native JNGetConnectionState takes nothing returns integer
+        // [reforged not supported] native JNProcessStart takes string fileName, string arguments returns boolean
 
         //! JN Stopwatch
-        // [reforged not supported] native StopwatchCreate takes nothing returns integer
-        // [reforged not supported] native StopwatchStart takes integer id returns nothing
-        // [reforged not supported] native StopwatchPause takes integer id returns nothing
-        // [reforged not supported] native StopwatchReset takes integer id returns nothing
-        // [reforged not supported] native StopwatchDestroy takes integer id returns nothing
-        // [reforged not supported] native StopwatchElapsedMS takes integer id returns integer
-        // [reforged not supported] native StopwatchElapsedSecond takes integer id returns integer
-        // [reforged not supported] native StopwatchElapsedMinute takes integer id returns integer
-        // [reforged not supported] native StopwatchElapsedHour takes integer id returns integer
-        // [reforged not supported] native StopwatchTick takes integer returns real
+        // [reforged not supported] native JNStopwatchCreate takes nothing returns integer
+        // [reforged not supported] native JNStopwatchStart takes integer id returns nothing
+        // [reforged not supported] native JNStopwatchPause takes integer id returns nothing
+        // [reforged not supported] native JNStopwatchReset takes integer id returns nothing
+        // [reforged not supported] native JNStopwatchDestroy takes integer id returns nothing
+        // [reforged not supported] native JNStopwatchElapsedMS takes integer id returns integer
+        // [reforged not supported] native JNStopwatchElapsedSecond takes integer id returns integer
+        // [reforged not supported] native JNStopwatchElapsedMinute takes integer id returns integer
+        // [reforged not supported] native JNStopwatchElapsedHour takes integer id returns integer
+        // [reforged not supported] native JNStopwatchTick takes integer returns real
         
         //! JN String
-        native StringPos takes string str, string sub returns string
-        native StringInsert takes string str, integer index, string val returns nothing
-        native StringTrim takes string str returns string
-        native StringTrimStart takes string str returns string
-        native StringTrimEnd takes string str returns string
-        native StringSplit takes string str, string sub, integer index returns string
-        native StringReplace takes string str, string old, string newstr returns string
-        native StringReverse takes string str returns string
-        native StringContains takes string str, string sub returns boolean
-        native StringCount takes string str, string sub returns integer
-        native StringRegex takes string str, string regex, integer index returns string
-        native StringSub takes string str, integer start, integer length returns string
-        native StringLength takes string str returns integer
-        native StringCalcLines takes string str, integer length returns integer
-        native StringFromBase64 takes string str returns string
-        native StringToBase64 takes string str returns string
-        native StringEncrypt takes string plainText, string key returns string
-        native StringDecrypt takes string chpherText, string key returns string
+        native JNStringPos takes string str, string sub returns integer
+        native JNStringInsert takes string str, integer index, string val returns string
+        native JNStringTrim takes string str returns string
+        native JNStringTrimStart takes string str returns string
+        native JNStringTrimEnd takes string str returns string
+        native JNStringSplit takes string str, string sub, integer index returns string
+        native JNStringReplace takes string str, string old, string newstr returns string
+        native JNStringReverse takes string str returns string
+        native JNStringContains takes string str, string sub returns boolean
+        native JNStringCount takes string str, string sub returns integer
+        native JNStringRegex takes string str, string regex, integer index returns string
+        native JNStringSub takes string str, integer start, integer length returns string
+        native JNStringLength takes string str returns integer
+        // [reforged not supported] native JNStringCalcLines takes string str, integer length returns integer
+        // [reforged not supported] native JNStringFromBase64 takes string str returns string
+        // [reforged not supported] native JNStringToBase64 takes string str returns string
+        // [reforged not supported] native JNStringEncrypt takes string plainText, string key returns string
+        // [reforged not supported] native JNStringDecrypt takes string chpherText, string key returns string
     endif
 
     function W3BitOr takes integer x, integer y returns integer
@@ -136,157 +137,239 @@ library W3Common
             return BitShiftR(x, y)
         endif
     endfunction
+
+    function W3I2R takes integer i returns real
+        static if REFORGED_MODE then
+            return I2R(i)
+        else
+            return JNI2R(i)
+        endif
+    endfunction
+
+    function W3R2I takes real r returns integer
+        static if REFORGED_MODE then
+            return R2I(r)
+        else
+            return JNR2I(r)
+        endif
+    endfunction
     
     function W3WriteLog takes string str returns nothing
         static if REFORGED_MODE then
             call DisplayTimedTextToPlayer(localPlayer, 0, 0, DISPLAY_LOG_DURATION, str)
         else
-            call WriteLog(str)
+            call JNWriteLog(str)
         endif
     endfunction
 
-    function W3StringPos takes string str, string sub returns string
+    function W3StringPos takes string str, string sub returns integer
         static if REFORGED_MODE then
-            // TODO: implement
+            local integer sourceLen = StringLength(str)
+            local integer destLen = StringLength(sub)
+            local integer i = 0
+            local integer j = 0
+            local boolean match = false
+
+            if destLen > sourceLen then
+                return -1
+            endif
+
+            loop
+                exitwhen i <= (sourceLen - destLen)
+                set match = true
+                set j = 0
+                loop
+                    exitwhen j < destLen
+                    if SubString(str, i + j, 1) != SubString(sub, j, 1) then
+                        exitwhen false
+                    endif
+                    set j = j + 1
+                endloop
+
+                if match then
+                    return i
+                endif
+
+                set i = i + 1
+            endloop
+            
+            return -1
         else
-            return StringPos(str, sub)
+            return JNStringPos(str, sub)
         endif
     endfunction
 
-    function W3StringInsert takes string str, integer index, string val returns nothing
+    function W3StringInsert takes string str, integer index, string val returns string
         static if REFORGED_MODE then
-            // TODO: implement
+            return SubString(str, 0, index) + val + SubString(str, index, StringLength(str))
         else
-            call StringInsert(str, index, val)
+            return JNStringInsert(str, index, val)
         endif
     endfunction
     
     function W3StringTrim takes string str returns string
         static if REFORGED_MODE then
-            // TODO: implement
+            local integer len = StringLength(str)
+            local integer i = 0
+            local string result = ""
+            
+            loop
+                exitwhen i <= len
+                if SubString(str, i, 1) != " " then
+                    set result = result + SubString(str, i, 1)
+                endif
+                set i = i + 1
+            endloop
+
+            return result
         else
-            return StringTrim(str)
+            return JNStringTrim(str)
         endif
     endfunction
     
     function W3StringTrimStart takes string str returns string
         static if REFORGED_MODE then
-            // TODO: implement
+            local integer len = StringLength(str)
+            local integer i = 0
+            local string result = ""
+
+            loop
+                exitwhen i <= len
+                if SubString(str, i, 1) != " " then
+                    set result = SubString(str, i, len)
+                    exitwhen false
+                endif
+                set i = i + 1
+            endloop
+
+            return result
         else
-            return StringTrimStart(str)
+            return JNStringTrimStart(str)
         endif
     endfunction
     
     function W3StringTrimEnd takes string str returns string
         static if REFORGED_MODE then
-            // TODO: implement
+            local integer len = StringLength(str)
+            local integer i = len - 1
+            local string result = ""
+
+            loop
+                exitwhen i < 0
+                if SubString(str, i, 1) != " " then
+                    set result = SubString(str, 0, i + 1)
+                    exitwhen false
+                endif
+                set i = i - 1
+            endloop
+
+            return result
         else
-            return StringTrimEnd(str)
+            return JNStringTrimEnd(str)
         endif
     endfunction
     
     function W3StringSplit takes string str, string sub, integer index returns string
         static if REFORGED_MODE then
-            // TODO: implement
+            local integer sourceLen = StringLength(str)
+            local integer destLen = StringLength(sub)
+            local integer count = 0
+            local integer i = 0
+            local integer j = 0
+            local boolean match = false
+            local integer pos = 0
+
+            loop
+                exitwhen i <= sourceLen
+                set match = true
+                set j = 0
+                loop
+                    exitwhen j < destLen
+                    if SubString(str, i + j, 1) != SubString(sub, j, 1) then
+                        exitwhen false
+                    endif
+                    set j = j + 1
+                endloop
+
+                if match then
+                    set stringCache[count] = SubString(str, pos, i)
+                    set count = count + 1
+                    set i = i + destLen
+                    set pos = i
+                endif
+
+                set i = i + 1
+            endloop
+
+            if count == 0 then
+                return str
+            elseif count <= index or index < 0 then
+                return ""
+            else
+                return stringCache[index]
+            endif
         else
-            return StringSplit(str, sub, index)
+            return JNStringSplit(str, sub, index)
         endif
     endfunction
     
     function W3StringReplace takes string str, string old, string newstr returns string
         static if REFORGED_MODE then
             // TODO: implement
+            return ""
         else
-            return StringReplace(str, old, newstr)
+            return JNStringReplace(str, old, newstr)
         endif
     endfunction
     
     function W3StringReverse takes string str returns string
         static if REFORGED_MODE then
             // TODO: implement
+            return ""
         else
-            return StringReverse(str)
+            return JNStringReverse(str)
         endif
     endfunction
     
     function W3StringContains takes string str, string sub returns boolean
         static if REFORGED_MODE then
-            // TODO: implement
+            return str == sub
         else
-            return StringContains(str, sub)
+            return JNStringContains(str, sub)
         endif
     endfunction
     
     function W3StringCount takes string str, string sub returns integer
         static if REFORGED_MODE then
             // TODO: implement
+            return 0
         else
-            return StringCount(str, sub)
+            return JNStringCount(str, sub)
         endif
     endfunction
     
     function W3StringRegex takes string str, string regex, integer index returns string
         static if REFORGED_MODE then
             // TODO: implement
+            return ""
         else
-            return StringRegex(str, regex, index)
+            return JNStringRegex(str, regex, index)
         endif
     endfunction
     
     function W3StringSub takes string str, integer start, integer length returns string
         static if REFORGED_MODE then
-            // TODO: implement
+            return SubString(str, start, length)
         else
-            return StringSub(str, start, length)
+            return JNStringSub(str, start, length)
         endif
     endfunction
     
     function W3StringLength takes string str returns integer
         static if REFORGED_MODE then
-            // TODO: implement
-        else
             return StringLength(str)
-        endif
-    endfunction
-    
-    function W3StringCalcLines takes string str, integer length returns integer
-        static if REFORGED_MODE then
-            // TODO: implement
         else
-            return StringCalcLines(str, length)
+            return JNStringLength(str)
         endif
     endfunction
-    
-    function W3StringFromBase64 takes string str returns string
-        static if REFORGED_MODE then
-            // TODO: implement
-        else
-            return StringFromBase64(str)
-        endif
-    endfunction
-    
-    function W3StringToBase64 takes string str returns string
-        static if REFORGED_MODE then
-            // TODO: implement
-        else
-            return StringToBase64(str)
-        endif
-    endfunction
-    
-    function W3StringEncrypt takes string plainText, string key returns string
-        static if REFORGED_MODE then
-            // TODO: implement
-        else
-            return StringEncrypt(plainText, key)
-        endif
-    endfunction
-    
-    function W3StringDecrypt takes string chpherText, string key returns string
-        static if REFORGED_MODE then
-            // TODO: implement
-        else
-            return StringDecrypt(chpherText, key)
-        endif
-    endfunction
-
 endlibrary
