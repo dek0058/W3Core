@@ -1,6 +1,6 @@
 
-// Debug
-//! import "Core//W3CDebug.j"
+// Plugin
+//! import "Plugin//W3Common.j"
 
 // Library
 // import "Library//Table.j"
