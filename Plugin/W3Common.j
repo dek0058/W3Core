@@ -29,53 +29,85 @@ library W3Common
         native JNI2R takes integer i returns real
         native JNR2I takes real r returns integer
         
-        //! JN Memory plugin (reforged not supported)
-        // globals
-        //     constant hashtable JNProc_ht = InitHashtable()
-        //     constant integer JNProc_key = StringHash("jass")
+        //! JN Memory
+        globals
+            constant hashtable JNProc_ht = InitHashtable()
+            constant integer JNProc_key = StringHash("jass")
 
-        //     constant integer JNProc__cdecl = 1
-        //     constant integer JNProc__stdcall = 2
-        //     constant integer JNProc__fastcall = 3
-        //     constant integer JNProc__thiscall = 4
-        // endglobals
-        // native JNGetModuleHandle takes string moduleName returns integer
-        // native JNFindModuleHandle takes integer offset, integer signature returns integer
-        // native JNMemoryGetByte takes integer offset returns integer
-        // native JNMemorySetByte takes integer offset, integer value returns nothing
-        // native JNMemoryGetInteger takes integer offset returns integer
-        // native JNMemorySetInteger takes integer offset, integer value returns nothing
-        // native JNMemoryGetReal takes integer offset returns real
-        // native JNMemorySetReal takes integer offset, real value returns nothing
-        // native JNMemoryGetString takes integer offset, integer size returns string
-        // native JNMemorySetString takes integer offset, string value, integer size returns nothing
-        // native JNProcCall takes integer callConv, integer address, hashtable ht returns boolean
+            constant integer JNProc__cdecl = 1
+            constant integer JNProc__stdcall = 2
+            constant integer JNProc__fastcall = 3
+            constant integer JNProc__thiscall = 4
+        endglobals
+        // *reforged not supported*
+        native JNGetModuleHandle takes string moduleName returns integer
+        // *reforged not supported*
+        native JNFindModuleHandle takes integer offset, integer signature returns integer
+        // *reforged not supported*
+        native JNMemoryGetByte takes integer offset returns integer
+        // *reforged not supported*
+        native JNMemorySetByte takes integer offset, integer value returns nothing
+        // *reforged not supported*
+        native JNMemoryGetInteger takes integer offset returns integer
+        // *reforged not supported*
+        native JNMemorySetInteger takes integer offset, integer value returns nothing
+        // *reforged not supported*
+        native JNMemoryGetReal takes integer offset returns real
+        // *reforged not supported*
+        native JNMemorySetReal takes integer offset, real value returns nothing
+        // *reforged not supported*
+        native JNMemoryGetString takes integer offset, integer size returns string
+        // *reforged not supported*
+        native JNMemorySetString takes integer offset, string value, integer size returns nothing
+        // *reforged not supported*
+        native JNProcCall takes integer callConv, integer address, hashtable ht returns boolean
 
         //! JN Miscellaneous
         native JNWriteLog takes string str returns nothing
-        // [reforged not supported] native JNWriteLogReal takes real r returns nothing
-        // [reforged not supported] native JNGetLocalDateTime takes nothing returns string
-        // [reforged not supported] native JNGetLocalUnixTime takes nothing returns integer
-        // [reforged not supported] native JNGetMaxAttackSpeed takes nothing returns real
-        // [reforged not supported] native JNSetMaxAttackSpeed takes real speed returns nothing
-        // [reforged not supported] native JNIsReplayMode takes nothing returns boolean
-        // [reforged not supported] native JNIsHostPlayer takes nothing returns boolean
-        // [reforged not supported] native JNGetSyncDelay takes nothing returns integer
-        // [reforged not supported] native JNSetSyncDelay takes integer delay returns nothing
-        // [reforged not supported] native JNGetConnectionState takes nothing returns integer
-        // [reforged not supported] native JNProcessStart takes string fileName, string arguments returns boolean
+        // *reforged not supported*
+        native JNWriteLogReal takes real r returns nothing
+        // *reforged not supported*
+        native JNGetLocalDateTime takes nothing returns string
+        // *reforged not supported*
+        native JNGetLocalUnixTime takes nothing returns integer
+        // *reforged not supported*
+        native JNGetMaxAttackSpeed takes nothing returns real
+        // *reforged not supported*
+        native JNSetMaxAttackSpeed takes real speed returns nothing
+        // *reforged not supported*
+        native JNIsReplayMode takes nothing returns boolean
+        // *reforged not supported*
+        native JNIsHostPlayer takes nothing returns boolean
+        // *reforged not supported*
+        native JNGetSyncDelay takes nothing returns integer
+        // *reforged not supported*
+        native JNSetSyncDelay takes integer delay returns nothing
+        // *reforged not supported*
+        native JNGetConnectionState takes nothing returns integer
+        // *reforged not supported*
+        native JNProcessStart takes string fileName, string arguments returns boolean
 
         //! JN Stopwatch
-        // [reforged not supported] native JNStopwatchCreate takes nothing returns integer
-        // [reforged not supported] native JNStopwatchStart takes integer id returns nothing
-        // [reforged not supported] native JNStopwatchPause takes integer id returns nothing
-        // [reforged not supported] native JNStopwatchReset takes integer id returns nothing
-        // [reforged not supported] native JNStopwatchDestroy takes integer id returns nothing
-        // [reforged not supported] native JNStopwatchElapsedMS takes integer id returns integer
-        // [reforged not supported] native JNStopwatchElapsedSecond takes integer id returns integer
-        // [reforged not supported] native JNStopwatchElapsedMinute takes integer id returns integer
-        // [reforged not supported] native JNStopwatchElapsedHour takes integer id returns integer
-        // [reforged not supported] native JNStopwatchTick takes integer returns real
+        // *reforged not supported*
+        native JNStopwatchCreate takes nothing returns integer
+        // *reforged not supported*
+        native JNStopwatchStart takes integer id returns nothing
+        // *reforged not supported*
+        native JNStopwatchPause takes integer id returns nothing
+        // *reforged not supported*
+        native JNStopwatchReset takes integer id returns nothing
+        // *reforged not supported*
+        native JNStopwatchDestroy takes integer id returns nothing
+        // *reforged not supported*
+        native JNStopwatchElapsedMS takes integer id returns integer
+        // *reforged not supported*
+        native JNStopwatchElapsedSecond takes integer id returns integer
+        // *reforged not supported*
+        native JNStopwatchElapsedMinute takes integer id returns integer
+        // *reforged not supported*
+        native JNStopwatchElapsedHour takes integer id returns integer
+        // *reforged not supported*
+        native JNStopwatchTick takes integer returns real
         
         //! JN String
         native JNStringPos takes string str, string sub returns integer
@@ -88,14 +120,20 @@ library W3Common
         native JNStringReverse takes string str returns string
         native JNStringContains takes string str, string sub returns boolean
         native JNStringCount takes string str, string sub returns integer
+        // *reforged not supported*
         native JNStringRegex takes string str, string regex, integer index returns string
         native JNStringSub takes string str, integer start, integer length returns string
         native JNStringLength takes string str returns integer
-        // [reforged not supported] native JNStringCalcLines takes string str, integer length returns integer
-        // [reforged not supported] native JNStringFromBase64 takes string str returns string
-        // [reforged not supported] native JNStringToBase64 takes string str returns string
-        // [reforged not supported] native JNStringEncrypt takes string plainText, string key returns string
-        // [reforged not supported] native JNStringDecrypt takes string chpherText, string key returns string
+        // *reforged not supported*
+        native JNStringCalcLines takes string str, integer length returns integer
+        // *reforged not supported*
+        native JNStringFromBase64 takes string str returns string
+        // *reforged not supported*
+        native JNStringToBase64 takes string str returns string
+        // *reforged not supported*
+        native JNStringEncrypt takes string plainText, string key returns string
+        // *reforged not supported*
+        native JNStringDecrypt takes string chpherText, string key returns string
     endif
 
     function W3BitOr takes integer x, integer y returns integer
@@ -324,8 +362,14 @@ library W3Common
     
     function W3StringReverse takes string str returns string
         static if REFORGED_MODE then
-            // TODO: implement
-            return ""
+            local integer len = StringLength(str)
+            local string result = ""
+            loop
+                exitwhen len <= 0
+                set result = result + SubString(str, len - 1, 1)
+                set len = len - 1
+            endloop
+            return result
         else
             return JNStringReverse(str)
         endif
@@ -347,16 +391,7 @@ library W3Common
             return JNStringCount(str, sub)
         endif
     endfunction
-    
-    function W3StringRegex takes string str, string regex, integer index returns string
-        static if REFORGED_MODE then
-            // TODO: implement
-            return ""
-        else
-            return JNStringRegex(str, regex, index)
-        endif
-    endfunction
-    
+
     function W3StringSub takes string str, integer start, integer length returns string
         static if REFORGED_MODE then
             return SubString(str, start, length)

@@ -1,6 +1,7 @@
 
 // Plugin
 //! import "Plugin//W3Common.j"
+//! import "Plugin//JNServer.j"
 
 // Library
 // import "Library//Table.j"
