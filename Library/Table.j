@@ -151,9 +151,9 @@ globals
     private integer tableKeyGen = 8190  //Index generation for Tables starts from here. Configure it if your map contains more than this many structs or 'key' objects.
 
     private hashtable hashTable = InitHashtable() // The last hashtable.
-
-    private constant boolean TEST = false      // set to `true` to enable error messages and `print`/`toString` API.
-    private constant boolean DEEP_TEST = false // set to `true` to enable informational messages.
+        
+    private constant boolean TEST = true      // set to `true` to enable error messages and `print`/`toString` API.
+    private constant boolean DEEP_TEST = true // set to `true` to enable informational messages.
 
     private keyword addKey
     private keyword addTypedKey
@@ -737,7 +737,9 @@ struct Table extends array
     implement FogStateModule
     implement FogModifierModule
     implement HashtableModule
-    implement FrameModule
+    static if REFORGED_MODE then
+        implement FrameModule
+    endif
 
     static if TEST then
         private method toStringFn takes integer depth returns string
@@ -1065,7 +1067,9 @@ endmodule
 //! runtextmacro HANDLE_VALUE_TABLE("FogState", "fogstate")
 //! runtextmacro HANDLE_VALUE_TABLE("FogModifier", "fogmodifier")
 //! runtextmacro HANDLE_VALUE_TABLE("Hashtable", "hashtable")
-//! runtextmacro HANDLE_VALUE_TABLE("Frame", "framehandle")
+static if REFORGED_MODE then
+    //! runtextmacro HANDLE_VALUE_TABLE("Frame", "framehandle")
+endif
 
 //! runtextmacro optional TABLE_VBC_STRUCTS()
 
